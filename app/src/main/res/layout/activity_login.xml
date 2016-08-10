@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:text="Hoşgeldiniz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewWelcome"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/editTextPhoneNumber"
+            android:hint="Tel"
+            android:inputType="phone" />
+
+        <Button
+            android:text="Giriş"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonLogin"
+            android:textAllCaps="false" />
+
+        <Button
+            android:text="Reset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonReset"
+            android:textAllCaps="false" />
+    </LinearLayout>
+
+</RelativeLayout>
