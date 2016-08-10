@@ -22,23 +22,22 @@ import java.net.URLEncoder;
 
 public class Connection extends AsyncTask<String, Boolean, Boolean> {
     // Api link
-    String connectionURL = "http://yildizozan.com/apis/village/loginProcess.php";
+    private String connectionURL = "http://yildizozan.com/apis/village/loginProcess.php";
 
     // Api key
-    String connectionKey;
+    private String connectionKey;
 
     // Timeouts
     private static final int TIMEOUT_READ = 7 * 1000;           // milisec
     private static final int TIMEOUT_CONNECTION = 10 * 1000;    // milisec
 
     private HttpURLConnection urlConnection;
-    private URL url;
 
     private Context mContext;
 
     private String mJSONString;
 
-    public Connection(Context context) {
+    Connection(Context context) {
         this.mContext = context;
     }
 
@@ -113,7 +112,7 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
 
         // Eğer bağlantı sırasında herhangi bir hata gelirse return döndürecek
         // Toast ile bilgi verecek.
-        if (aBoolean == false) {
+        if (aBoolean) {
             Toast.makeText(mContext, "Bağlantı hatası.", Toast.LENGTH_SHORT).show();
             Log.e("ERR CONN 349", "aBoolean false");
             return;

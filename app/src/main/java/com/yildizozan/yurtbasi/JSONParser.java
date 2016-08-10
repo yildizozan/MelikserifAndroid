@@ -22,7 +22,7 @@ public class JSONParser {
             JSONObject jsonObject = jsonRootObject.getJSONObject("user");
 
             // If member not found
-            if (jsonObject.getBoolean("error") == true)
+            if (jsonObject.getBoolean("error"))
                 return false;
 
             mMember = new Member(jsonObject);
