@@ -5,7 +5,7 @@ import android.util.Log;
 import org.json.JSONObject;
 
 /**
- * Created by Ozan on 8/6/2016.
+ * Created by Ozan Yıldız on 2016/8/5.
  */
 
 public class Member {
