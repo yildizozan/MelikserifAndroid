@@ -28,8 +28,8 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
     String connectionKey;
 
     // Timeouts
-    private static final int TIMEOUT_READ = 3000;
-    private static final int TIMEOUT_CONNECTION = 5000;
+    private static final int TIMEOUT_READ = 7 * 1000;           // milisec
+    private static final int TIMEOUT_CONNECTION = 10 * 1000;    // milisec
 
     private HttpURLConnection urlConnection;
     private URL url;
@@ -45,7 +45,6 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
         Toast.makeText(mContext, "Bağlanılıyor...", Toast.LENGTH_SHORT).show();
     }
 
@@ -99,7 +98,7 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
             }
 
         } catch (Exception e) {
-            Log.e("ERR CODE 238", e.getMessage());
+            Log.e("ERR CONN 348", e.getMessage());
             return false;
         } finally {
             urlConnection.disconnect();
@@ -116,19 +115,16 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
         // Toast ile bilgi verecek.
         if (aBoolean == false) {
             Toast.makeText(mContext, "Bağlantı hatası.", Toast.LENGTH_SHORT).show();
+            Log.e("ERR CONN 349", "aBoolean false");
             return;
         }
 
         JSONParser jsonParser = new JSONParser(mJSONString);
         if (jsonParser.setMember())
-            Toast.makeText(mContext,
-                    jsonParser.getmMember().getPhoneNumber() + " " +
-                    jsonParser.getmMember().getName() + " " +
-                    jsonParser.getmMember().getSurname() + " " +
-                    jsonParser.getmMember().getRegister(),
-                    Toast.LENGTH_SHORT).show();
-        else
+            Toast.makeText(mContext, jsonParser.getMemberString(), Toast.LENGTH_SHORT).show();
+        else {
             Toast.makeText(mContext, mJSONString, Toast.LENGTH_SHORT).show();
-
+            Log.e("ERR CONN 350", mJSONString);
+        }
     }
 }

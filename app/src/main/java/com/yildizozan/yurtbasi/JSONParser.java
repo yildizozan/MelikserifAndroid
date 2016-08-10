@@ -28,14 +28,23 @@ public class JSONParser {
             mMember = new Member(jsonObject);
 
         } catch (Exception e) {
-            Log.e("JSON PARSER", e.getMessage());
+            Log.e("ERR JSON PARSER 567", e.getMessage());
             return false;
         }
 
         return true;
     }
 
-    public Member getmMember() {
+    public Member getMember() {
         return mMember;
+    }
+
+    public String getMemberString() {
+        return  getMember().getPhoneNumber() + "\n" +
+                getMember().getName() + "\n" +
+                getMember().getSurname() + "\n" +
+                getMember().getRegister() + "\n" +
+                getMember().getPassword() + "\n" +
+                getMember().getPosition();
     }
 }
