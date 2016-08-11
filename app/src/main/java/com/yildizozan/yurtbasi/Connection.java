@@ -1,6 +1,8 @@
 package com.yildizozan.yurtbasi;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -21,6 +23,9 @@ import java.net.URLEncoder;
  */
 
 public class Connection extends AsyncTask<String, Boolean, Boolean> {
+    // Progress dialog
+    private ProgressDialog mProgressDialog;
+
     // Api link
     private String connectionURL = "http://yildizozan.com/apis/village/loginProcess.php";
 
@@ -39,12 +44,19 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
 
     Connection(Context context) {
         this.mContext = context;
+        mProgressDialog = new ProgressDialog(context);
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        Toast.makeText(mContext, "Bağlanılıyor...", Toast.LENGTH_SHORT).show();
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setMessage("Giriş yapılıyor...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.show();
+
+        //Toast.makeText(mContext, "Bağlanılıyor...", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -76,6 +88,7 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
             BufferedWriter bufferedWriter = new BufferedWriter(
                     new OutputStreamWriter(outputStream, "UTF-8")
             );
+
             bufferedWriter.write(data);
             bufferedWriter.flush();
             bufferedWriter.close();
@@ -110,17 +123,26 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
 
+        // Progress dialog finish for toast message
+        mProgressDialog.dismiss();
+
         // Eğer bağlantı sırasında herhangi bir hata gelirse return döndürecek
         // Toast ile bilgi verecek.
-        if (aBoolean) {
+        if (!aBoolean) {
             Toast.makeText(mContext, "Bağlantı hatası.", Toast.LENGTH_SHORT).show();
             Log.e("ERR CONN 349", "aBoolean false");
             return;
         }
 
         JSONParser jsonParser = new JSONParser(mJSONString);
-        if (jsonParser.setMember())
+        if (jsonParser.setMember()) {
             Toast.makeText(mContext, jsonParser.getMemberString(), Toast.LENGTH_SHORT).show();
+            Log.e("CONN JSONParser", jsonParser.getMemberString());
+
+            // If there is member in the database.
+            Intent intent = new Intent(mContext, PasswordVerifyActivity.class);
+            mContext.startActivity(intent);
+        }
         else {
             Toast.makeText(mContext, mJSONString, Toast.LENGTH_SHORT).show();
             Log.e("ERR CONN 350", mJSONString);

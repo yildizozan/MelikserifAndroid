@@ -33,7 +33,7 @@ public class LoginActivity extends Activity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Connection(getApplicationContext()).execute(editTextPhoneNumber.getText().toString());
+                new Connection(LoginActivity.this).execute(editTextPhoneNumber.getText().toString());
             }
         });
 
