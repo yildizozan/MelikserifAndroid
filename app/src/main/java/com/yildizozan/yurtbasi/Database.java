@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
- * Created by Ozan on 8/5/2016.
+ * Created by Ozan Yıldız on 2016/8/5.
  */
 
 public class Database extends SQLiteOpenHelper {
@@ -31,7 +31,7 @@ public class Database extends SQLiteOpenHelper {
     private static String PASSWORD = "password";
     private static String POSITION = "position";
 
-    public Database(Context context) {
+    Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -62,29 +62,6 @@ public class Database extends SQLiteOpenHelper {
 
         db.insert(TABLE_NAME, null, contentValues);
         db.close();
-    }
-
-    public boolean updatePassword(Member member) {
-        if (equals(member.getPhoneNumber() == "Required"))
-            return false;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(PASSWORD, member.getPassword());
-
-        db.update(TABLE_NAME, contentValues, "phoneNumber = " + member.getPhoneNumber(), null);
-        db.close();
-
-        Log.e("UPDATE PASS", member.getPhoneNumber() + "-" +
-                member.getName() + "-" +
-                member.getSurname() + "-" +
-                member.getRegister() + "-" +
-                member.getPassword() + "-" +
-                member.getPosition()
-        );
-
-        return true;
     }
 
     public Member getMember() {

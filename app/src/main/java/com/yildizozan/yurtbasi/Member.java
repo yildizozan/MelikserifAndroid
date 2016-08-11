@@ -4,11 +4,13 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
- * Created by Ozan on 8/6/2016.
+ * Created by Ozan Yıldız on 2016/8/5.
  */
 
-public class Member {
+public class Member implements Serializable {
     private String phoneNumber;
     private String name;
     private String surname;
@@ -23,6 +25,15 @@ public class Member {
         register = null;
         password = 0;
         position = 0;
+    }
+
+    Member(Member member) {
+        this.phoneNumber = member.getPhoneNumber();
+        this.name = member.getName();
+        this.surname = member.getSurname();
+        this.register = member.getRegister();
+        this.password = member.getPassword();
+        this.position = member.getPosition();
     }
 
     Member(JSONObject jsonObject) {
@@ -84,5 +95,14 @@ public class Member {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public String getMemberResult() {
+        return  getPhoneNumber() + "\n" +
+                getName() + "\n" +
+                getSurname() + "\n" +
+                getRegister() + "\n" +
+                getPassword() + "\n" +
+                getPosition();
     }
 }

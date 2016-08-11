@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewWelcome"
-        android:textSize="14sp"
+        android:textSize="30sp"
         android:textAlignment="center"
         android:paddingBottom="10dp"
         android:paddingTop="10dp" />
@@ -36,12 +36,6 @@
             android:id="@+id/buttonLogin"
             android:textAllCaps="false" />
 
-        <Button
-            android:text="Reset"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonReset"
-            android:textAllCaps="false" />
     </LinearLayout>
 
 </RelativeLayout>
