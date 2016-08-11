@@ -7,7 +7,7 @@ import android.widget.TextView;
 /**
  * Created by Ozan Yıldız on 2016/8/5.
  */
-
+ 
 public class PasswordVerifyActivity extends Activity {
 
     private TextView textViewResult;
