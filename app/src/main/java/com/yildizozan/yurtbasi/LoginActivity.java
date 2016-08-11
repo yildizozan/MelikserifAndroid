@@ -28,7 +28,7 @@ public class LoginActivity extends Activity {
         loginButton = (Button) findViewById(R.id.buttonLogin);
 
         // Toast message toast
-        Toast.makeText(getApplicationContext(), "Yurtbaşı Köyü'ne hoşgeldiniz", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Yurtbaşı Köyü'ne hoşgeldiniz.", Toast.LENGTH_SHORT).show();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,7 +36,5 @@ public class LoginActivity extends Activity {
                 new Connection(LoginActivity.this).execute(editTextPhoneNumber.getText().toString());
             }
         });
-
-
     }
 }

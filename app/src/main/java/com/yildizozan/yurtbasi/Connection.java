@@ -14,9 +14,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 /**
  * Created by Ozan Yıldız on 2016/8/5.
@@ -126,7 +128,7 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
         // Progress dialog finish for toast message
         mProgressDialog.dismiss();
 
-        // Eğer bağlantı sırasında herhangi bir hata gelirse return döndürecek
+        // Eğer bağlantı sırasında herhangi bir hata gelirse return döndürecek.
         // Toast ile bilgi verecek.
         if (!aBoolean) {
             Toast.makeText(mContext, "Bağlantı hatası.", Toast.LENGTH_SHORT).show();
@@ -141,10 +143,12 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
 
             // If there is member in the database.
             Intent intent = new Intent(mContext, PasswordVerifyActivity.class);
+            Member member = jsonParser.getMember();
+            intent.putExtra("memberforpasswordverify", member);
             mContext.startActivity(intent);
         }
         else {
-            Toast.makeText(mContext, mJSONString, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Kişi bulunamadı.", Toast.LENGTH_SHORT).show();
             Log.e("ERR CONN 350", mJSONString);
         }
     }
