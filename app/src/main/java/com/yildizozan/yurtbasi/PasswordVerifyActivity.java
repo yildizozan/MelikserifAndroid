@@ -1,8 +1,13 @@
 package com.yildizozan.yurtbasi;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Ozan Yıldız on 2016/8/5.
@@ -11,6 +16,10 @@ import android.widget.TextView;
 public class PasswordVerifyActivity extends Activity {
 
     private TextView textViewResult;
+    private EditText editTextPassword;
+    private Button buttonVerify;
+
+    private Member member;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +27,28 @@ public class PasswordVerifyActivity extends Activity {
         setContentView(R.layout.activity_passwordverify);
 
         textViewResult = (TextView) findViewById(R.id.textViewResult);
+        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        buttonVerify = (Button) findViewById(R.id.buttonVerify);
 
         // Gelen intent datasını alıyoruz.
-        Member member = (Member) getIntent().getSerializableExtra("memberforpasswordverify");
-        textViewResult.setText(member.getMemberResult());
+        member = (Member) getIntent().getSerializableExtra("memberforpasswordverify");
+
 
     }
+
+    // Butona tıklandığında girilen şifreyi kontrol edecek.
+    public void PasswordVerify(View v) {
+        if (editTextPassword.getText().toString().isEmpty())
+            Toast.makeText(getApplicationContext(), "Lütfen şifre yazınız.", Toast.LENGTH_SHORT).show();
+        else if (member.getPassword() == Integer.parseInt(editTextPassword.getText().toString())) {
+            Toast.makeText(getApplicationContext(), "Şifre doğru.", Toast.LENGTH_SHORT).show();
+
+            // Main activity için giriş yapılıyor.
+            Intent intent = new Intent(PasswordVerifyActivity.this, MainActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getApplication(), "Şifre yanlış.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
