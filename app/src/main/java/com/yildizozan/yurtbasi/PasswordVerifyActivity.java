@@ -15,9 +15,7 @@ import android.widget.Toast;
 
 public class PasswordVerifyActivity extends Activity {
 
-    private TextView textViewResult;
     private EditText editTextPassword;
-    private Button buttonVerify;
 
     private Member mMember;
 
@@ -26,29 +24,25 @@ public class PasswordVerifyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passwordverify);
 
-        textViewResult = (TextView) findViewById(R.id.textViewResult);
+        final TextView textViewResult = (TextView) findViewById(R.id.textViewResult);
+        final Button buttonVerify = (Button) findViewById(R.id.buttonVerify);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        buttonVerify = (Button) findViewById(R.id.buttonVerify);
 
         // Gelen intent datasını alıyoruz.
         mMember = (Member) getIntent().getSerializableExtra("memberforpasswordverify");
-
-
     }
 
     // Butona tıklandığında girilen şifreyi kontrol edecek.
     public void PasswordVerify(View v) {
         if (editTextPassword.getText().toString().isEmpty())
-            Toast.makeText(getApplicationContext(), "Lütfen şifre yazınız.", Toast.LENGTH_SHORT).show();
+            editTextPassword.setError("Lütfen şifre yazınız.");
         else if (mMember.getPassword() == Integer.parseInt(editTextPassword.getText().toString())) {
-            Toast.makeText(getApplicationContext(), "Şifre doğru.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Tekrar hoşgeldiniz.", Toast.LENGTH_SHORT).show();
 
             // Main activity için giriş yapılıyor.
             Intent intent = new Intent(PasswordVerifyActivity.this, MainActivity.class);
             startActivity(intent);
-        } else {
-            Toast.makeText(getApplication(), "Şifre yanlış.", Toast.LENGTH_SHORT).show();
-        }
+        } else
+            editTextPassword.setError("Şifre yanlış.");
     }
-
 }

@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:layout_marginLeft="16sp"
+    android:layout_marginRight="16sp">
 
     <TextView
         android:text="Yurtbaşı Köyü'ne Hoşgeldiniz"

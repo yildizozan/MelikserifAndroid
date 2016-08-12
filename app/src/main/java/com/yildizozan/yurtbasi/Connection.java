@@ -27,7 +27,7 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
     private ProgressDialog mProgressDialog;
 
     // Api link
-    private String connectionURL = "http://yildizozan.com/apis/village/loginProcess.php";
+    private final String connectionURL = "http://yildizozan.com/apis/village/loginProcess.php";
 
     // Api key
     private String connectionKey;

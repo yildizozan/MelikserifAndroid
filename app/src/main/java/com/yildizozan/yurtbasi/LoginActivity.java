@@ -31,9 +31,9 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (editTextPhoneNumber.getText().toString().isEmpty())
-                    Toast.makeText(getApplicationContext(), "Numara yazınız.", Toast.LENGTH_SHORT).show();
+                    editTextPhoneNumber.setError("Numara yazınız.");
                 else if (editTextPhoneNumber.length() != 10)
-                    Toast.makeText(getApplicationContext(), "Başında sıfır olmadan 10 haneli numaranızı yazınız.", Toast.LENGTH_SHORT).show();
+                    editTextPhoneNumber.setError("Başında sıfır olmadan numaranızı yazınız.");
                 else
                     new Connection(LoginActivity.this).execute(editTextPhoneNumber.getText().toString());
             }
