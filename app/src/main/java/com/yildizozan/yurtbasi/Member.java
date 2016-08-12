@@ -19,31 +19,31 @@ public class Member implements Serializable {
     private int position;
 
     Member() {
-        phoneNumber = null;
-        name = null;
-        surname = null;
-        register = null;
-        password = 0;
-        position = 0;
+        setPhoneNumber(null);
+        setName(null);
+        setSurname(null);
+        setRegister(null);
+        setPassword(0);
+        setPosition(0);
     }
 
     Member(Member member) {
-        this.phoneNumber = member.getPhoneNumber();
-        this.name = member.getName();
-        this.surname = member.getSurname();
-        this.register = member.getRegister();
-        this.password = member.getPassword();
-        this.position = member.getPosition();
+        this.setPhoneNumber(member.getPhoneNumber());
+        this.setName(member.getName());
+        this.setSurname(member.getSurname());
+        this.setRegister(member.getRegister());
+        this.setPassword(member.getPassword());
+        this.setPosition(member.getPosition());
     }
 
     Member(JSONObject jsonObject) {
         try {
-            phoneNumber = jsonObject.getString("phoneNumber");
-            name = jsonObject.getString("name");
-            surname = jsonObject.getString("surname");
-            register = jsonObject.getString("register");
-            password = jsonObject.getInt("password");
-            position = jsonObject.getInt("position");
+            setPhoneNumber(jsonObject.getString("phoneNumber"));
+            setName(jsonObject.getString("name"));
+            setSurname(jsonObject.getString("surname"));
+            setRegister(jsonObject.getString("register"));
+            setPassword(jsonObject.getInt("password"));
+            setPosition(jsonObject.getInt("position"));
         } catch (Exception e) {
             Log.e("MEMBER jsonPARSE", e.getMessage());
         }
@@ -96,6 +96,7 @@ public class Member implements Serializable {
     public void setPosition(int position) {
         this.position = position;
     }
+
 
     public String getMemberResult() {
         return  getPhoneNumber() + "\n" +

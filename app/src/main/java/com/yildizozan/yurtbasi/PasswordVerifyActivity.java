@@ -19,7 +19,7 @@ public class PasswordVerifyActivity extends Activity {
     private EditText editTextPassword;
     private Button buttonVerify;
 
-    private Member member;
+    private Member mMember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class PasswordVerifyActivity extends Activity {
         buttonVerify = (Button) findViewById(R.id.buttonVerify);
 
         // Gelen intent datasını alıyoruz.
-        member = (Member) getIntent().getSerializableExtra("memberforpasswordverify");
+        mMember = (Member) getIntent().getSerializableExtra("memberforpasswordverify");
 
 
     }
@@ -40,7 +40,7 @@ public class PasswordVerifyActivity extends Activity {
     public void PasswordVerify(View v) {
         if (editTextPassword.getText().toString().isEmpty())
             Toast.makeText(getApplicationContext(), "Lütfen şifre yazınız.", Toast.LENGTH_SHORT).show();
-        else if (member.getPassword() == Integer.parseInt(editTextPassword.getText().toString())) {
+        else if (mMember.getPassword() == Integer.parseInt(editTextPassword.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Şifre doğru.", Toast.LENGTH_SHORT).show();
 
             // Main activity için giriş yapılıyor.
