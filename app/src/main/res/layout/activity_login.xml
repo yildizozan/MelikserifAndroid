@@ -6,7 +6,7 @@
     tools:context=".LoginActivity">
 
     <TextView
-        android:text="Hoşgeldiniz"
+        android:text="Yurtbaşı Köyü'ne Hoşgeldiniz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewWelcome"

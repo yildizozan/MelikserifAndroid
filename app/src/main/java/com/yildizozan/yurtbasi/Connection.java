@@ -136,7 +136,7 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
 
         JSONParser jsonParser = new JSONParser(mJSONString);
         if (jsonParser.setMember()) {
-            Toast.makeText(mContext, jsonParser.getMemberString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Şifre: " + jsonParser.getMember().getPassword(), Toast.LENGTH_SHORT).show();
             Log.e("CONN JSONParser", jsonParser.getMemberString());
 
             // If there is member in the database.

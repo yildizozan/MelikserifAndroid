@@ -27,16 +27,13 @@ public class LoginActivity extends Activity {
         editTextPhoneNumber = (EditText) findViewById(R.id.editTextPhoneNumber);
         loginButton = (Button) findViewById(R.id.buttonLogin);
 
-        // Toast message toast
-        Toast.makeText(getApplicationContext(), "Yurtbaşı Köyü'ne hoşgeldiniz.", Toast.LENGTH_SHORT).show();
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (editTextPhoneNumber.getText().toString().isEmpty())
                     Toast.makeText(getApplicationContext(), "Numara yazınız.", Toast.LENGTH_SHORT).show();
                 else if (editTextPhoneNumber.length() != 10)
-                    Toast.makeText(getApplicationContext(), "Başında sıfır olmadan 11 haneli numaranızı yazınız.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Başında sıfır olmadan 10 haneli numaranızı yazınız.", Toast.LENGTH_SHORT).show();
                 else
                     new Connection(LoginActivity.this).execute(editTextPhoneNumber.getText().toString());
             }
