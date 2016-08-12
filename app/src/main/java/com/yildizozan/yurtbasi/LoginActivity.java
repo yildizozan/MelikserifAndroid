@@ -33,7 +33,12 @@ public class LoginActivity extends Activity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Connection(LoginActivity.this).execute(editTextPhoneNumber.getText().toString());
+                if (editTextPhoneNumber.getText().toString().isEmpty())
+                    Toast.makeText(getApplicationContext(), "Numara yazınız.", Toast.LENGTH_SHORT).show();
+                else if (editTextPhoneNumber.length() != 10)
+                    Toast.makeText(getApplicationContext(), "Başında sıfır olmadan 11 haneli numaranızı yazınız.", Toast.LENGTH_SHORT).show();
+                else
+                    new Connection(LoginActivity.this).execute(editTextPhoneNumber.getText().toString());
             }
         });
     }
