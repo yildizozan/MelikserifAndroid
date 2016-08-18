@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,15 +8,14 @@
     android:layout_marginLeft="16sp"
     android:layout_marginRight="16sp">
 
-    <TextView
-        android:text="Yurtbaşı Köyü'ne Hoşgeldiniz"
+
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewWelcome"
-        android:textSize="30sp"
-        android:textAlignment="center"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp" />
+        android:layout_height="100sp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageViewLogo" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -38,6 +38,18 @@
             android:id="@+id/buttonLogin"
             android:textAllCaps="false"
             android:background="@drawable/button_login"/>
+
+        <Button
+            android:text="Kayıt ol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonRegister"
+            android:textAllCaps="false"
+            android:background="@drawable/button_login"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="false"
+            android:layout_marginTop="5sp" />
 
     </LinearLayout>
 
