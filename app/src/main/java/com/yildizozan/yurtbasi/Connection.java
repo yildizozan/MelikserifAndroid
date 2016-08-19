@@ -10,11 +10,14 @@ import android.widget.Toast;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -27,7 +30,7 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
     private ProgressDialog mProgressDialog;
 
     // Api link
-    private String connectionURL = "http://yildizozan.com/apis/village/loginProcess.php";
+    private final String connectionURL = "http://yildizozan.com/apis/village/loginProcess.php";
 
     // Api key
     private String connectionKey;
@@ -109,8 +112,17 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
                 }
             }
 
-        } catch (Exception e) {
-            Log.e("ERR CONN 348", e.getMessage());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            Log.e("ERR CONN 377", e.getMessage());
+            return false;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            Log.e("ERR CONN 378", e.getMessage());
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("ERR CONN 379", e.getMessage());
             return false;
         } finally {
             urlConnection.disconnect();
