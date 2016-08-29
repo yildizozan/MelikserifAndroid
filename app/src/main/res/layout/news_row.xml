@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10sp">
+
+    <TextView
+        android:text="Haber başlıpı"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewNewsTitle"
+        android:layout_weight="3"
+        android:textAlignment="textStart" />
+
+    <TextView
+        android:text="Haberin tarihi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewNewsDate"
+        android:layout_weight="1"
+        android:textAlignment="textEnd"
+        android:textStyle="normal|italic" />
+
+</LinearLayout>

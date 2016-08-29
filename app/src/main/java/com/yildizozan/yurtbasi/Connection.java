@@ -154,7 +154,7 @@ public class Connection extends AsyncTask<String, Boolean, Boolean> {
             // If there is member in the database.
             Intent intent = new Intent(mContext, PasswordVerifyActivity.class);
             Member member = jsonParser.getMember();
-            intent.putExtra("memberforpasswordverify", member);
+                intent.putExtra("memberforpasswordverify", member);
             mContext.startActivity(intent);
         }
         else {
