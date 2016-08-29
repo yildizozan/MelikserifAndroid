@@ -32,9 +32,11 @@ public class MainActivity extends Activity {
         ListView listViewForNews = (ListView) findViewById(R.id.ListViewNews);
 
         // Haberler listemizi hazırlıyoruz
-        newses.add(new News("16-08-2016", "Konya gezisi", loremIpsum, "Ozan Yıldız"));
-        newses.add(new News("16-08-2016", "Ankara gezisi", loremIpsum, "Nazım"));
-        newses.add(new News("16-08-2016", "İstanbul gezisi", loremIpsum, "Yusuf"));
+        newses.add(new News("Konya gezisi", loremIpsum, "Ozan Yıldız", "16-08-2016"));
+        newses.add(new News("Ankara gezisi", loremIpsum, "Nazım Yıldız", "16-08-2016"));
+        newses.add(new News("Kars gezisi", loremIpsum, "Süleyman Yıldız", "16-08-2016"));
+        newses.add(new News("Antalya gezisi", loremIpsum, "Abdülrezzakgül Yıldız", "16-08-2016"));
+        newses.add(new News("Gaziosmanpaşa gezisi", loremIpsum, "Yıldızlararasında Yıldız", "16-08-2016"));
 
         // Adaptörümüzü oluşturuyoruz daha sonra ilgili habere tıklandığında haber sayfası açılacak.
         NewsAdapter newsAdapter = new NewsAdapter(this, newses);

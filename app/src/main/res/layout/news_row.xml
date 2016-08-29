@@ -1,48 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10sp">
 
     <TextView
-        android:id="@+id/textViewNewsTitle"
-        android:layout_width="match_parent"
+        android:text="Haber başlıpı"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Haber başlığı"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:layout_marginBottom="5sp" />
+        android:id="@+id/textViewNewsTitle"
+        android:layout_weight="3"
+        android:textAlignment="textStart" />
 
     <TextView
-        android:text="Haber içeriği"
-        android:layout_width="match_parent"
+        android:text="Haberin tarihi"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewNewsContent"
-        android:layout_marginBottom="10sp" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10sp">
-
-        <TextView
-            android:text="Yazar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewNewsAuthor"
-            android:textSize="12sp"
-            android:textStyle="normal|italic"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/textViewNewsDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Tarih"
-            android:textSize="12sp" />
-
-    </LinearLayout>
+        android:id="@+id/textViewNewsDate"
+        android:layout_weight="1"
+        android:textAlignment="textEnd"
+        android:textStyle="normal|italic" />
 
 </LinearLayout>

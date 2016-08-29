@@ -43,18 +43,12 @@ public class NewsAdapter extends BaseAdapter {
         View view;
 
         view = mLayoutInflater.inflate(R.layout.news_row, null);
-
-        TextView textViewNewsDate = (TextView) view.findViewById(R.id.textViewNewsDate);
-        TextView textViewNewsTitle = (TextView) view.findViewById(R.id.textViewNewsTitle);
-        TextView textViewNewsContent = (TextView) view.findViewById(R.id.textViewNewsContent);
-        TextView textViewNewsAuthor = (TextView) view.findViewById(R.id.textViewNewsAuthor);
-
         News news = mNewses.get(position);
 
-        textViewNewsDate.setText(news.getmDate());
-        textViewNewsTitle.setText(news.getmTitle());
-        textViewNewsContent.setText(news.getmContent());
-        textViewNewsAuthor.setText("Yazar: " + news.getmAuthor());
+        TextView textViewNewsTitle = (TextView) view.findViewById(R.id.textViewNewsTitle);
+        TextView textViewNewsDate = (TextView) view.findViewById(R.id.textViewNewsDate);
+        textViewNewsTitle.setText(news.getTitle());
+        textViewNewsDate.setText(news.getDate());
 
         return view;
     }

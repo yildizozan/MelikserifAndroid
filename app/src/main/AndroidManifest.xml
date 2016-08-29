@@ -14,11 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".LoginActivity" >
-        </activity>
+        <activity android:name=".LoginActivity" ></activity>
 
-        <activity android:name=".PasswordVerifyActivity" >
-        </activity>
+        <activity android:name=".PasswordVerifyActivity" ></activity>
+
+        <activity android:name=".RegisterActivity" ></activity>
 
         <activity android:name=".MainActivity" >
             <intent-filter>
@@ -28,8 +28,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RegisterActivity" >
-        </activity>
+        <activity android:name=".NewsShowActivity" ></activity>
 
     </application>
 

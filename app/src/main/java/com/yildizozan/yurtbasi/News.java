@@ -7,54 +7,55 @@ import java.io.Serializable;
  */
 
 public class News implements Serializable {
-    private String mDate;
-    private String mTitle;
-    private String mContent;
-    private String mAuthor;
 
-    public News(String pDate, String pTitle, String pContent, String pAuthor) {
-        this.mDate = pDate;
-        this.mTitle = pTitle;
-        this.mContent = pContent;
-        this.mAuthor = pAuthor;
+    private String title;
+    private String content;
+    private String author;
+    private String date;
+
+    public News(String title, String content, String author, String date) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.date = date;
     }
 
-    public News(News pNews) {
-        this.mDate = pNews.getmDate();
-        this.mTitle = pNews.getmTitle();
-        this.mContent = pNews.getmContent();
-        this.mAuthor = pNews.getmAuthor();
+    public News(News news) {
+        this.title = news.getTitle();
+        this.content =news.getContent();
+        this.author = news.getAuthor();
+        this.date = getDate();
     }
 
-    public String getmDate() {
-        return mDate;
+    public String getTitle() {
+        return title;
     }
 
-    public void setmDate(String mDate) {
-        this.mDate = mDate;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getmTitle() {
-        return mTitle;
+    public String getContent() {
+        return content;
     }
 
-    public void setmTitle(String mTitle) {
-        this.mTitle = mTitle;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getmContent() {
-        return mContent;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setmContent(String mContent) {
-        this.mContent = mContent;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public String getmAuthor() {
-        return mAuthor;
+    public String getDate() {
+        return date;
     }
 
-    public void setmAuthor(String mAuthor) {
-        this.mAuthor = mAuthor;
+    public void setDate(String date) {
+        this.date = date;
     }
 }
