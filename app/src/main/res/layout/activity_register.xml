@@ -7,14 +7,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:text="Telefon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewPhoneNumber"
-                android:layout_marginTop="20sp" />
+                android:layout_marginTop="16sp" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewFirstName"
-                android:layout_marginTop="20sp" />
+                android:layout_marginTop="16sp" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewMiddleName"
-                android:layout_marginTop="20sp" />
+                android:layout_marginTop="16sp" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewLastName"
-                android:layout_marginTop="20sp" />
+                android:layout_marginTop="16sp" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="20sp" >
+                android:layout_marginTop="16sp">
                 <TextView
                     android:text="Cinsiyet"
                     android:layout_width="wrap_content"
@@ -94,8 +94,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonRegister"
-                android:layout_marginTop="10dip"
-                android:background="@drawable/button_login" />
+                android:background="@drawable/button_login"
+                android:layout_marginTop="16sp" />
 
         </LinearLayout>
     </ScrollView>

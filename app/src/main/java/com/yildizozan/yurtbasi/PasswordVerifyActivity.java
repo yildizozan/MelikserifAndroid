@@ -24,12 +24,13 @@ public class PasswordVerifyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passwordverify);
 
+        // Content oluştuktan sonra gelen intent datasını hemen alıyoruz.
+        mMember = (Member) getIntent().getSerializableExtra("memberforpasswordverify");
+
+        // Ekrandaki componentleri tanımlıyoruz
         final TextView textViewResult = (TextView) findViewById(R.id.textViewResult);
         final Button buttonVerify = (Button) findViewById(R.id.buttonVerify);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-
-        // Gelen intent datasını alıyoruz.
-        mMember = (Member) getIntent().getSerializableExtra("memberforpasswordverify");
     }
 
     // Butona tıklandığında girilen şifreyi kontrol edecek.

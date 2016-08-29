@@ -19,21 +19,21 @@ public class Member implements Serializable {
     private int position;
 
     Member() {
-        setPhoneNumber(null);
-        setName(null);
-        setSurname(null);
-        setRegister(null);
-        setPassword(0);
-        setPosition(0);
+        this.phoneNumber = null;
+        this.name = null;
+        this.surname = null;
+        this.register = null;
+        this.password = 0;
+        this.position = 0;
     }
 
     Member(Member member) {
-        this.setPhoneNumber(member.getPhoneNumber());
-        this.setName(member.getName());
-        this.setSurname(member.getSurname());
-        this.setRegister(member.getRegister());
-        this.setPassword(member.getPassword());
-        this.setPosition(member.getPosition());
+        this.phoneNumber = member.getPhoneNumber();
+        this.name = member.getName();
+        this.surname = member.getSurname();
+        this.register = member.getRegister();
+        this.password = member.getPassword();
+        this.position = member.getPosition();
     }
 
     Member(JSONObject jsonObject) {
@@ -96,7 +96,6 @@ public class Member implements Serializable {
     public void setPosition(int position) {
         this.position = position;
     }
-
 
     public String getMemberResult() {
         return  getPhoneNumber() + "\n" +
