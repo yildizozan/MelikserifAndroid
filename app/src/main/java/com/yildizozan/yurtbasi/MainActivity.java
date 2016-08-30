@@ -1,7 +1,7 @@
 package com.yildizozan.yurtbasi;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         // Webden dataları çekiyoruz ve ArrayList'imize atıyoruz.
-        new getAllNews(this).execute();
+        new getAllNews().execute();
     }
 
     /*
@@ -58,10 +58,20 @@ public class MainActivity extends Activity {
 
         private HttpURLConnection urlConnection;
         private String jsonString;
-        private Activity activity;
 
-        public getAllNews(Activity activity) {
-            this.activity = activity;
+        private ProgressDialog progressDialog;
+
+        public getAllNews() {
+            super();
+            progressDialog = new ProgressDialog(MainActivity.this);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.setMessage("Haberler yükleniyor");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
         }
 
         @Override
@@ -89,18 +99,6 @@ public class MainActivity extends Activity {
                 BufferedWriter bufferedWriter = new BufferedWriter(
                         new OutputStreamWriter(outputStream, "UTF-8")
                 );
-
-                /*
-                                // Prepare data for output stream
-                String data =
-                        URLEncoder.encode("min", "UTF-8") + "=" + URLEncoder.encode(params[0], "UTF-8")
-                        + "&" +
-                        URLEncoder.encode("max", "UTF-8") + "=" + URLEncoder.encode(params[1], "UTF-8");
-
-                bufferedWriter.write(data);
-                bufferedWriter.flush();
-                bufferedWriter.close();
-                */
 
                 // Connect!
                 urlConnection.connect();
@@ -144,6 +142,9 @@ public class MainActivity extends Activity {
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
 
+            // ProgressDialog'tan kurtuluyoruz
+            progressDialog.dismiss();
+
             // Anasayfamızda sadace haberler gösterileceği için LinearLayout şeklinde sıralayacağız.
             listViewForNews= (ListView) findViewById(R.id.ListViewNews);
 
@@ -153,7 +154,7 @@ public class MainActivity extends Activity {
                     newses = jsonParser.getNews();
 
                     // Adaptörümüzü oluşturuyoruz daha sonra ilgili habere tıklandığında haber sayfası açılacak.
-                    NewsAdapter newsAdapter = new NewsAdapter(activity, newses);
+                    NewsAdapter newsAdapter = new NewsAdapter(MainActivity.this, newses);
                     listViewForNews.setAdapter(newsAdapter);
                     listViewForNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
