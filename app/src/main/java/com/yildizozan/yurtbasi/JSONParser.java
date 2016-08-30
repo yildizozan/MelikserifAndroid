@@ -3,6 +3,7 @@ package com.yildizozan.yurtbasi;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class JSONParser {
     private String jsonString;
     private Member member;
-    private News news;
+    private ArrayList<News> newses = new ArrayList<News>();
 
     JSONParser(String jsonString) {
         this.jsonString = jsonString.substring(4);
@@ -58,22 +59,27 @@ public class JSONParser {
      */
     public boolean setNews() {
         try {
-            JSONObject jsonRootObject = new JSONObject(this.jsonString);
-            JSONObject jsonObject = jsonRootObject.getJSONObject("news");
+            JSONArray jsonArray = new JSONArray(this.jsonString);
 
-            this.news = new News(jsonObject);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-        } catch (Exception e) {
-            Log.e("CTRL 9666", e.getMessage());
+                newses.add(new News(jsonObject));
+
+                //String string = temp.getTitle() + "/" + temp.getContent() + "/" + temp.getAuthor() + "/" + temp.getDate();
+                // Log.e("TEMP", string);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("JSONParser", e.getMessage());
             return false;
         }
 
         return true;
     }
 
-
-    public News getNews() {
-        return news;
+    public ArrayList<News> getNews() {
+        return newses;
     }
 
 }

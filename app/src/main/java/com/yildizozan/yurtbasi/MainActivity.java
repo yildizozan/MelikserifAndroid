@@ -1,6 +1,7 @@
 package com.yildizozan.yurtbasi;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,7 +23,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,32 +32,17 @@ import java.util.List;
 
 public class MainActivity extends Activity {
 
-    private List<News> newses = new ArrayList<News>();
+    private List<News> newses = new ArrayList<>();
+
+    ListView listViewForNews;
 
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Anasayfamızda sadace haberler gösterileceği için LinearLayout şeklinde sıralayacağız.
-        ListView listViewForNews = (ListView) findViewById(R.id.ListViewNews);
-
-         // Webden dataları çekiyoruz ve ArrayList'imize atıyoruz.
-         new getAllNews().execute();
-
-        // Adaptörümüzü oluşturuyoruz daha sonra ilgili habere tıklandığında haber sayfası açılacak.
-        NewsAdapter newsAdapter = new NewsAdapter(this, newses);
-        listViewForNews.setAdapter(newsAdapter);
-        listViewForNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(MainActivity.this, NewsShowActivity.class);
-                    News news = newses.get(position);
-                    intent.putExtra("NEWSINFO", news);
-                    startActivity(intent);
-            }
-        });
-
+        // Webden dataları çekiyoruz ve ArrayList'imize atıyoruz.
+        new getAllNews(this).execute();
     }
 
     /*
@@ -73,9 +58,10 @@ public class MainActivity extends Activity {
 
         private HttpURLConnection urlConnection;
         private String jsonString;
+        private Activity activity;
 
-        public getAllNews() {
-            super();
+        public getAllNews(Activity activity) {
+            this.activity = activity;
         }
 
         @Override
@@ -103,7 +89,6 @@ public class MainActivity extends Activity {
                 BufferedWriter bufferedWriter = new BufferedWriter(
                         new OutputStreamWriter(outputStream, "UTF-8")
                 );
-
 
                 /*
                                 // Prepare data for output stream
@@ -159,12 +144,26 @@ public class MainActivity extends Activity {
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
 
+            // Anasayfamızda sadace haberler gösterileceği için LinearLayout şeklinde sıralayacağız.
+            listViewForNews= (ListView) findViewById(R.id.ListViewNews);
+
             if (aBoolean) {
                 JSONParser jsonParser = new JSONParser(jsonString);
                 if (jsonParser.setNews()) {
-                    //newses = jsonParser.getNews();
-                    News temp = jsonParser.getNews();
-                    Log.e("XXX", temp.getTitle());
+                    newses = jsonParser.getNews();
+
+                    // Adaptörümüzü oluşturuyoruz daha sonra ilgili habere tıklandığında haber sayfası açılacak.
+                    NewsAdapter newsAdapter = new NewsAdapter(activity, newses);
+                    listViewForNews.setAdapter(newsAdapter);
+                    listViewForNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent = new Intent(MainActivity.this, NewsShowActivity.class);
+                            News news = newses.get(position);
+                            intent.putExtra("NEWSINFO", news);
+                            startActivity(intent);
+                        }
+                    });
                 }
             } else {
                 Toast.makeText(MainActivity.this, "Haberlere ulaşılamadı!", Toast.LENGTH_SHORT).show();

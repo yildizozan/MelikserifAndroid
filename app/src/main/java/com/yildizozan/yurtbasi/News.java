@@ -2,6 +2,7 @@ package com.yildizozan.yurtbasi;
 
 import android.util.Log;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
@@ -42,7 +43,6 @@ public class News implements Serializable {
         } catch (Exception e) {
             Log.e("News jsonParse", e.getMessage());
         }
-
     }
 
     public String getTitle() {
@@ -76,4 +76,5 @@ public class News implements Serializable {
     public void setDate(String date) {
         this.date = date;
     }
+
 }
