@@ -1,4 +1,4 @@
-package com.yildizozan.yurtbasi;
+package com.yildizozan.melikserif;
 
 import android.content.ContentValues;
 import android.content.Context;

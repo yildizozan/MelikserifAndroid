@@ -4,7 +4,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
     defaultConfig {
-        applicationId "com.yildizozan.yurtbasi"
+        applicationId "com.yildizozan.melikserif"
         minSdkVersion 9
         targetSdkVersion 23
         versionCode 1

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yildizozan.yurtbasi">
+    package="com.yildizozan.melikserif">
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -14,15 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".LoginActivity" >
+        <activity android:name="com.yildizozan.melikserif.LoginActivity" >
 
         </activity>
 
-        <activity android:name=".PasswordVerifyActivity" ></activity>
+        <activity android:name="com.yildizozan.melikserif.PasswordVerifyActivity" ></activity>
 
-        <activity android:name=".RegisterActivity" ></activity>
+        <activity android:name="com.yildizozan.melikserif.RegisterActivity" ></activity>
 
-        <activity android:name=".MainActivity" >
+        <activity android:name="com.yildizozan.melikserif.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".NewsShowActivity" ></activity>
+        <activity android:name="com.yildizozan.melikserif.NewsShowActivity" ></activity>
 
     </application>
 
