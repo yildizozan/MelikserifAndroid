@@ -37,6 +37,7 @@ public class Member implements Serializable {
     }
 
     Member(JSONObject jsonObject) {
+
         try {
             setPhoneNumber(jsonObject.getString("phoneNumber"));
             setName(jsonObject.getString("name"));
@@ -45,7 +46,7 @@ public class Member implements Serializable {
             setPassword(jsonObject.getInt("password"));
             setPosition(jsonObject.getInt("position"));
         } catch (Exception e) {
-            Log.e("MEMBER jsonPARSE", e.getMessage());
+            Log.e("Member jsonPARSE", e.getMessage());
         }
     }
 

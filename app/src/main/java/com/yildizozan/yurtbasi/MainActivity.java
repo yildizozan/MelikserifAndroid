@@ -2,11 +2,27 @@ package com.yildizozan.yurtbasi;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,14 +32,9 @@ import java.util.List;
 
 public class MainActivity extends Activity {
 
-    final List<News> newses = new ArrayList<News>();
+    private List<News> newses = new ArrayList<News>();
 
-    // Example datas
-    final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget purus nec ligula luctus semper. Sed eu augue ut metus gravida dapibus quis quis libero. Nam ac posuere nisl. Aenean gravida dignissim sapien non laoreet. Curabitur vitae faucibus nulla. Morbi lacinia quis enim vitae vestibulum. Nunc ut aliquam est, ut facilisis metus. Phasellus efficitur, augue eget consequat semper, augue enim sodales metus, sed mattis eros enim et sapien. Integer faucibus consectetur nisl et cursus. Quisque placerat purus lorem, eu tincidunt dui maximus ut. Suspendisse potenti. Duis ac fringilla dolor, quis porta enim.\n" +
-            "\n" +
-            "Aenean condimentum ante nisi. Donec eget turpis nulla. Aliquam vitae interdum erat. In et luctus tortor, quis rutrum risus. Mauris risus dui, mattis in tincidunt sit amet, mollis non enim. Mauris finibus, dui sed faucibus venenatis, est sapien consectetur magna, semper sollicitudin enim dolor a nulla. Morbi maximus vehicula magna blandit porttitor. Proin pretium cursus elit, ac condimentum nisi varius vitae. Vivamus maximus, neque id bibendum sollicitudin, lacus ligula suscipit libero, id sagittis mauris ligula vitae lorem. Vestibulum posuere semper pulvinar. Etiam condimentum urna odio, in venenatis tellus maximus ac. Vivamus mattis, tortor ac sagittis pellentesque, metus augue imperdiet enim, sit amet faucibus ante diam ut leo. Vestibulum id nisl neque.";
-
-    @Override
+     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -31,12 +42,8 @@ public class MainActivity extends Activity {
         // Anasayfamızda sadace haberler gösterileceği için LinearLayout şeklinde sıralayacağız.
         ListView listViewForNews = (ListView) findViewById(R.id.ListViewNews);
 
-        // Haberler listemizi hazırlıyoruz
-        newses.add(new News("Konya gezisi", loremIpsum, "Ozan Yıldız", "16-08-2016"));
-        newses.add(new News("Ankara gezisi", loremIpsum, "Nazım Yıldız", "16-08-2016"));
-        newses.add(new News("Kars gezisi", loremIpsum, "Süleyman Yıldız", "16-08-2016"));
-        newses.add(new News("Antalya gezisi", loremIpsum, "Abdülrezzakgül Yıldız", "16-08-2016"));
-        newses.add(new News("Gaziosmanpaşa gezisi", loremIpsum, "Yıldızlararasında Yıldız", "16-08-2016"));
+         // Webden dataları çekiyoruz ve ArrayList'imize atıyoruz.
+         new getAllNews().execute();
 
         // Adaptörümüzü oluşturuyoruz daha sonra ilgili habere tıklandığında haber sayfası açılacak.
         NewsAdapter newsAdapter = new NewsAdapter(this, newses);
@@ -51,5 +58,117 @@ public class MainActivity extends Activity {
             }
         });
 
+    }
+
+    /*
+    ***
+     */
+    private class getAllNews extends AsyncTask<String, Boolean, Boolean> {
+
+        // Timeouts
+        private static final int TIMEOUT_READ = 7 * 1000;           // milisec
+        private static final int TIMEOUT_CONNECTION = 10 * 1000;    // milisec
+
+        private final String connectionURL = "http://yildizozan.com/projects/melikserif/api/getAllNews.php";
+
+        private HttpURLConnection urlConnection;
+        private String jsonString;
+
+        public getAllNews() {
+            super();
+        }
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            // Start connection
+            try {
+                URL url = new URL(connectionURL);
+                urlConnection = (HttpURLConnection) url.openConnection();
+
+                // Setting for timeouts
+                urlConnection.setReadTimeout(TIMEOUT_READ);
+                urlConnection.setConnectTimeout(TIMEOUT_CONNECTION);
+
+                // Setting for input output
+                urlConnection.setDoOutput(true);
+                urlConnection.setDoInput(true);
+
+                // Prepare HTTP Header
+                urlConnection.setRequestProperty("Accept-Charset", "UTF-8");
+                urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+
+
+                // Prepare output streaming
+                OutputStream outputStream = urlConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(
+                        new OutputStreamWriter(outputStream, "UTF-8")
+                );
+
+
+                /*
+                                // Prepare data for output stream
+                String data =
+                        URLEncoder.encode("min", "UTF-8") + "=" + URLEncoder.encode(params[0], "UTF-8")
+                        + "&" +
+                        URLEncoder.encode("max", "UTF-8") + "=" + URLEncoder.encode(params[1], "UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                */
+
+                // Connect!
+                urlConnection.connect();
+
+                int responseCode = urlConnection.getResponseCode();
+                if (responseCode == urlConnection.HTTP_OK)
+                {
+                    InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                    if (inputStream != null)
+                    {
+                        BufferedReader bufferedReader = new BufferedReader(
+                                new InputStreamReader(inputStream, "UTF-8")
+                        );
+                        String line = "";
+
+                        while ((line = bufferedReader.readLine()) != null)
+                            jsonString += line;
+                    }
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+                Log.e("CTRL 377", e.getMessage());
+                return false;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                Log.e("CTRL 378", e.getMessage());
+                return false;
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e("CTRL 379", e.getMessage());
+                return false;
+            } finally {
+                urlConnection.disconnect();
+            }
+
+            Log.i("CTRL 9653", jsonString);
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+
+            if (aBoolean) {
+                JSONParser jsonParser = new JSONParser(jsonString);
+                if (jsonParser.setNews()) {
+                    //newses = jsonParser.getNews();
+                    News temp = jsonParser.getNews();
+                    Log.e("XXX", temp.getTitle());
+                }
+            } else {
+                Toast.makeText(MainActivity.this, "Haberlere ulaşılamadı!", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
