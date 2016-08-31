@@ -14,15 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.yildizozan.melikserif.LoginActivity" >
-
-        </activity>
-
-        <activity android:name="com.yildizozan.melikserif.PasswordVerifyActivity" ></activity>
-
-        <activity android:name="com.yildizozan.melikserif.RegisterActivity" ></activity>
-
-        <activity android:name="com.yildizozan.melikserif.MainActivity" >
+        <activity android:name=".LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +22,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.yildizozan.melikserif.NewsShowActivity" ></activity>
+        <activity android:name=".PasswordVerifyActivity" ></activity>
+
+        <activity android:name=".RegisterActivity" ></activity>
+
+        <activity android:name=".MainActivity" ></activity>
+
+        <activity android:name=".NewsShowActivity" ></activity>
 
     </application>
 

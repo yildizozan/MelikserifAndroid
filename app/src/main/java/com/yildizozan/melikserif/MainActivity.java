@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
@@ -40,6 +41,16 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+         Database db = new Database(this);
+
+         TextView textViewBio = (TextView) findViewById(R.id.textViewBio);
+         textViewBio.setText(db.getRowCount() + "/" +
+                 db.getMember().getFirstName() + "/" +
+                 db.getMember().getMiddleName() + "/" +
+                 db.getMember().getFamilyName() + "/" +
+                 db.getMember().getBirthDate()
+         );
 
         // Webden dataları çekiyoruz ve ArrayList'imize atıyoruz.
         new getAllNews().execute();

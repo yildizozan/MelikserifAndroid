@@ -41,6 +41,24 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Database db = new Database(this);
+        if (db.getRowCount() == 1) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Database db = new Database(this);
+        if (db.getRowCount() == 1) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+
         setContentView(R.layout.activity_login);
 
         final ImageView imageViewLogo = (ImageView) findViewById(R.id.imageViewLogo);
@@ -59,8 +77,8 @@ public class LoginActivity extends Activity {
                     editTextPhoneNumber.setError("Numara yazınız.");
                 else if (editTextPhoneNumber.length() != 10)
                     editTextPhoneNumber.setError("Başında sıfır olmadan numaranızı yazınız.");
-                else
-                    new Login(LoginActivity.this).execute(editTextPhoneNumber.getText().toString());
+                else    // Form doldurulmuşsa activity çalışıyor.
+                    new Login(LoginActivity.this).execute();
             }
         });
 
@@ -83,7 +101,7 @@ public class LoginActivity extends Activity {
         private static final int TIMEOUT_CONNECTION = 10 * 1000;    // milisec
 
         // Api link
-        private final String connectionURL = "http://yildizozan.com/apis/village/loginProcess.php";
+        private final String connectionURL = "http://yildizozan.com/projects/melikserif/api/login.php";
 
         // Api key
         private String connectionKey;
@@ -91,6 +109,7 @@ public class LoginActivity extends Activity {
         // Progress dialog
         private ProgressDialog mProgressDialog;
 
+        private String phoneNumber;
         private HttpURLConnection urlConnection;
         private Context mContext;
         private String mJSONString;
@@ -111,6 +130,8 @@ public class LoginActivity extends Activity {
             mProgressDialog.setMessage("Giriş yapılıyor...");
             mProgressDialog.setCancelable(false);
             mProgressDialog.show();
+
+            phoneNumber = editTextPhoneNumber.getText().toString();
 
         }
 
@@ -136,7 +157,7 @@ public class LoginActivity extends Activity {
 
                 // Prepare data for sending
                 String data = URLEncoder.encode("phoneNumber", "UTF-8") + "=" +
-                        URLEncoder.encode(params[0], "UTF-8");
+                        URLEncoder.encode(phoneNumber, "UTF-8");
 
                 // Prepare output streaming
                 OutputStream outputStream = urlConnection.getOutputStream();
@@ -201,7 +222,6 @@ public class LoginActivity extends Activity {
             JSONParser jsonParser = new JSONParser(mJSONString);
             if (jsonParser.setMember()) {
                 Toast.makeText(mContext, "Şifre: " + jsonParser.getMember().getPassword(), Toast.LENGTH_SHORT).show();
-                Log.e("CONN JSONParser", jsonParser.getMemberString());
 
                 // If there is member in the database.
                 Intent intent = new Intent(mContext, PasswordVerifyActivity.class);

@@ -24,7 +24,7 @@ public class JSONParser {
     public boolean setMember() {
         try {
             JSONObject jsonRootObject = new JSONObject(this.jsonString);
-            JSONObject jsonObject = jsonRootObject.getJSONObject("user");
+            JSONObject jsonObject = jsonRootObject.getJSONObject("person");
 
             // If member not found
             if (jsonObject.getBoolean("error"))
@@ -44,15 +44,6 @@ public class JSONParser {
         return member;
     }
 
-    public String getMemberString() {
-        return  getMember().getPhoneNumber() + "\n" +
-                getMember().getName() + "\n" +
-                getMember().getSurname() + "\n" +
-                getMember().getRegister() + "\n" +
-                getMember().getPassword() + "\n" +
-                getMember().getPosition();
-    }
-
     /*
     *** Burada oluşturulan ArrayList'e gelen haberleri depolayacak
     *** Ardından da get ile ArrayList döndürecek.
@@ -66,8 +57,6 @@ public class JSONParser {
 
                 newses.add(new News(jsonObject));
 
-                //String string = temp.getTitle() + "/" + temp.getContent() + "/" + temp.getAuthor() + "/" + temp.getDate();
-                // Log.e("TEMP", string);
             }
         } catch (JSONException e) {
             e.printStackTrace();

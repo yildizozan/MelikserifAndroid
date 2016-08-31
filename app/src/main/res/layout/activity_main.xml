@@ -5,6 +5,12 @@
     android:orientation="vertical">
 
     <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewBio" />
+
+    <TextView
         android:text="Haberler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

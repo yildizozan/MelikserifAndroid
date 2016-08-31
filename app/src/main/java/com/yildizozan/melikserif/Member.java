@@ -2,6 +2,7 @@ package com.yildizozan.melikserif;
 
 import android.util.Log;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
@@ -12,40 +13,48 @@ import java.io.Serializable;
 
 public class Member implements Serializable {
     private String phoneNumber;
-    private String name;
-    private String surname;
+    private String password;
     private String register;
-    private int password;
-    private int position;
+    private String gender;
+    private String firstName;
+    private String middleName;
+    private String familyName;
+    private String birthDate;
 
     Member() {
         this.phoneNumber = null;
-        this.name = null;
-        this.surname = null;
+        this.password = null;
         this.register = null;
-        this.password = 0;
-        this.position = 0;
+        this.gender = null;
+        this.firstName = null;
+        this.middleName = null;
+        this.familyName = null;
+        this.birthDate = null;
     }
 
     Member(Member member) {
         this.phoneNumber = member.getPhoneNumber();
-        this.name = member.getName();
-        this.surname = member.getSurname();
-        this.register = member.getRegister();
         this.password = member.getPassword();
-        this.position = member.getPosition();
+        this.register = member.getRegister();
+        this.gender = member.getGender();
+        this.firstName = member.getFirstName();
+        this.middleName = member.getMiddleName();
+        this.familyName = member.getFamilyName();
+        this.birthDate = member.getBirthDate();
     }
 
     Member(JSONObject jsonObject) {
 
         try {
             setPhoneNumber(jsonObject.getString("phoneNumber"));
-            setName(jsonObject.getString("name"));
-            setSurname(jsonObject.getString("surname"));
+            setPassword(jsonObject.getString("password"));
             setRegister(jsonObject.getString("register"));
-            setPassword(jsonObject.getInt("password"));
-            setPosition(jsonObject.getInt("position"));
-        } catch (Exception e) {
+            setGender(jsonObject.getString("gender"));
+            setFirstName(jsonObject.getString("firstName"));
+            setMiddleName(jsonObject.getString("middleName"));
+            setFamilyName(jsonObject.getString("familyName"));
+            setBirthDate(jsonObject.getString("birthDate"));
+        } catch (JSONException e) {
             Log.e("Member jsonPARSE", e.getMessage());
         }
     }
@@ -58,20 +67,12 @@ public class Member implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getName() {
-        return name;
+    public String getPassword() {
+        return password;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRegister() {
@@ -82,28 +83,43 @@ public class Member implements Serializable {
         this.register = register;
     }
 
-    public int getPassword() {
-        return password;
+    public String getGender() {
+        return gender;
     }
 
-    public void setPassword(int password) {
-        this.password = password;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public int getPosition() {
-        return position;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getMemberResult() {
-        return  getPhoneNumber() + "\n" +
-                getName() + "\n" +
-                getSurname() + "\n" +
-                getRegister() + "\n" +
-                getPassword() + "\n" +
-                getPosition();
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 }

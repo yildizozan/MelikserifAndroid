@@ -25,11 +25,14 @@ public class Database extends SQLiteOpenHelper {
     // Database columns
     private static String ID = "id";
     private static String PHONENUMBER = "phoneNumber";
-    private static String NAME = "name";
-    private static String SURNAME = "surname";
-    private static String REGISTER = "register";
     private static String PASSWORD = "password";
-    private static String POSITION = "position";
+    private static String REGISTER = "register";
+    private static String GENDER = "gender";
+    private static String FIRSTNAME = "firstName";
+    private static String MIDDLENAME = "middleName";
+    private static String FAMILYNAME = "familyName";
+    private static String BIRTHDATE = "birthDate";
+
 
     Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,11 +43,13 @@ public class Database extends SQLiteOpenHelper {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                 + ID + " INTEGER PRIMARY KEY,"
                 + PHONENUMBER + " TEXT,"
-                + NAME + " TEXT,"
-                + SURNAME + " TEXT,"
-                + REGISTER + " TEXT,"
                 + PASSWORD + " INT,"
-                + POSITION + " INT" + ")";
+                + REGISTER + " TEXT,"
+                + GENDER + " TEXT,"
+                + FIRSTNAME + " TEXT,"
+                + MIDDLENAME + " TEXT,"
+                + FAMILYNAME + " TEXT,"
+                + BIRTHDATE + " TEXT" + ")";
         Log.e("CREATE DB: ", CREATE_TABLE);
         db.execSQL(CREATE_TABLE);
     }
@@ -54,11 +59,14 @@ public class Database extends SQLiteOpenHelper {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(PHONENUMBER, member.getPhoneNumber());
-        contentValues.put(NAME, member.getName());
-        contentValues.put(SURNAME, member.getSurname());
-        contentValues.put(REGISTER, member.getRegister());
         contentValues.put(PASSWORD, member.getPassword());
-        contentValues.put(POSITION, member.getPosition());
+        contentValues.put(REGISTER, member.getRegister());
+        contentValues.put(GENDER, member.getGender());
+        contentValues.put(FIRSTNAME, member.getFirstName());
+        contentValues.put(MIDDLENAME, member.getMiddleName());
+        contentValues.put(FAMILYNAME, member.getFamilyName());
+        contentValues.put(BIRTHDATE, member.getRegister());
+
 
         db.insert(TABLE_NAME, null, contentValues);
         db.close();
@@ -75,11 +83,13 @@ public class Database extends SQLiteOpenHelper {
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {
             memberInfo.setPhoneNumber(cursor.getString(1));
-            memberInfo.setName(cursor.getString(2));
-            memberInfo.setSurname(cursor.getString(3));
-            memberInfo.setRegister(cursor.getString(4));
-            memberInfo.setPassword(cursor.getInt(5));
-            memberInfo.setPosition(cursor.getInt(6));
+            memberInfo.setPassword(cursor.getString(2));
+            memberInfo.setRegister(cursor.getString(3));
+            memberInfo.setGender(cursor.getString(4));
+            memberInfo.setFirstName(cursor.getString(5));
+            memberInfo.setMiddleName(cursor.getString(6));
+            memberInfo.setFamilyName(cursor.getString(7));
+            memberInfo.setBirthDate(cursor.getString(8));
         }
         cursor.close();
         db.close();
@@ -93,6 +103,7 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(countQuery, null);
+        cursor.moveToFirst();
         int rowCount = cursor.getCount();
         cursor.close();
 
