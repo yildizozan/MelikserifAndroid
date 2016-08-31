@@ -1,4 +1,4 @@
-package com.yildizozan.yurtbasi;
+package com.yildizozan.melikserif;
 
 import org.junit.Test;
 

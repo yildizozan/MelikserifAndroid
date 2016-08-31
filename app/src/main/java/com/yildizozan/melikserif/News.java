@@ -1,4 +1,8 @@
-package com.yildizozan.yurtbasi;
+package com.yildizozan.melikserif;
+
+import android.util.Log;
+
+import org.json.JSONObject;
 
 import java.io.Serializable;
 
@@ -25,6 +29,19 @@ public class News implements Serializable {
         this.content =news.getContent();
         this.author = news.getAuthor();
         this.date = getDate();
+    }
+
+    // Eğer sınıfıa jsonObject gönderilirse onu değişkenlere parçalayacak.
+    public News(JSONObject jsonObject) {
+
+        try {
+            this.title = jsonObject.getString("title");
+            this.content = jsonObject.getString("content");
+            this.author = jsonObject.getString("author");
+            this.date = jsonObject.getString("date");
+        } catch (Exception e) {
+            Log.e("News jsonParse", e.getMessage());
+        }
     }
 
     public String getTitle() {
@@ -58,4 +75,5 @@ public class News implements Serializable {
     public void setDate(String date) {
         this.date = date;
     }
+
 }
