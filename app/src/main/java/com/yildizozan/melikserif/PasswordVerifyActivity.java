@@ -3,6 +3,7 @@ package com.yildizozan.melikserif;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,15 +17,20 @@ import android.widget.Toast;
 
 public class PasswordVerifyActivity extends Activity {
 
+    private Database db;
     private EditText editTextPassword;
 
     private Member member;
+
+    public PasswordVerifyActivity() {
+        super();
+        db = new Database(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Database db = new Database(this);
         if (db.getRowCount() == 1) {
             Intent intent = new Intent(PasswordVerifyActivity.this, MainActivity.class);
             startActivity(intent);
@@ -34,7 +40,6 @@ public class PasswordVerifyActivity extends Activity {
     protected void onStart() {
         super.onStart();
 
-        Database db = new Database(this);
         if (db.getRowCount() == 1) {
             Intent intent = new Intent(PasswordVerifyActivity.this, MainActivity.class);
             startActivity(intent);
@@ -49,6 +54,21 @@ public class PasswordVerifyActivity extends Activity {
         final TextView textViewResult = (TextView) findViewById(R.id.textViewResult);
         final Button buttonVerify = (Button) findViewById(R.id.buttonVerify);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (db.getRowCount() == 1) {
+            Intent intent = new Intent(PasswordVerifyActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
     }
 
     // Butona tıklandığında girilen şifreyi kontrol edecek.

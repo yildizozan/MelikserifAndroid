@@ -37,12 +37,17 @@ import java.net.URLEncoder;
 public class LoginActivity extends Activity {
 
     private TextView editTextPhoneNumber;
+    private Database db;
+
+    public LoginActivity() {
+        super();
+        db = new Database(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Database db = new Database(this);
         if (db.getRowCount() == 1) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
@@ -53,7 +58,6 @@ public class LoginActivity extends Activity {
     protected void onStart() {
         super.onStart();
 
-        Database db = new Database(this);
         if (db.getRowCount() == 1) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
@@ -91,9 +95,24 @@ public class LoginActivity extends Activity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (db.getRowCount() == 1) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
+    }
+
     /*
-    ***
-     */
+        ***
+         */
     private class Login extends AsyncTask<String, Boolean, Boolean> {
 
         // Timeouts
