@@ -46,14 +46,15 @@ public class Member implements Serializable {
     Member(JSONObject jsonObject) {
 
         try {
-            setPhoneNumber(jsonObject.getString("phoneNumber"));
-            setPassword(jsonObject.getString("password"));
-            setRegister(jsonObject.getString("register"));
-            setGender(jsonObject.getString("gender"));
-            setFirstName(jsonObject.getString("firstName"));
-            setMiddleName(jsonObject.getString("middleName"));
-            setFamilyName(jsonObject.getString("familyName"));
-            setBirthDate(jsonObject.getString("birthDate"));
+            this.phoneNumber = jsonObject.getString("phoneNumber");
+            this.password = jsonObject.getString("password");
+            this.register = jsonObject.getString("register");
+            this.gender = jsonObject.getString("gender");
+            this.firstName = jsonObject.getString("firstName");
+            this.middleName = jsonObject.getString("middleName");
+            this.familyName = jsonObject.getString("familyName");
+            this.birthDate = jsonObject.getString("birthDate");
+
         } catch (JSONException e) {
             Log.e("Member jsonPARSE", e.getMessage());
         }

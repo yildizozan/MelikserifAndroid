@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,32 +34,37 @@ import java.util.List;
 
 public class MainActivity extends Activity {
 
+    private Database db;
+
     private List<News> newses = new ArrayList<>();
 
     ListView listViewForNews;
 
-     @Override
+    public MainActivity() {
+        super();
+
+        db = new Database(this);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-         Database db = new Database(this);
-
-         TextView textViewBio = (TextView) findViewById(R.id.textViewBio);
-         textViewBio.setText(db.getRowCount() + "/" +
-                 db.getMember().getFirstName() + "/" +
-                 db.getMember().getMiddleName() + "/" +
-                 db.getMember().getFamilyName() + "/" +
-                 db.getMember().getBirthDate()
-         );
 
         // Webden dataları çekiyoruz ve ArrayList'imize atıyoruz.
         new getAllNews().execute();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        db.close();
+    }
+
     /*
-    ***
-     */
+        ***
+         */
     private class getAllNews extends AsyncTask<String, Boolean, Boolean> {
 
         // Timeouts

@@ -77,7 +77,7 @@ public class PasswordVerifyActivity extends Activity {
         if (editTextPassword.getText().toString().equals(member.getPassword())) {
             Toast.makeText(
                     getApplicationContext(),
-                    member.getFirstName() + "" + member.getFamilyName() + " Tekrar hoşgeldiniz.",
+                    member.getFirstName() + " " + member.getFamilyName() + " tekrar hoşgeldiniz.",
                     Toast.LENGTH_LONG).show();
 
             // Kişiyi database'e kayıt ediyoruz.
