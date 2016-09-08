@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
         private static final int TIMEOUT_READ = 7 * 1000;           // milisec
         private static final int TIMEOUT_CONNECTION = 10 * 1000;    // milisec
 
-        private final String connectionURL = "http://yildizozan.com/projects/melikserif/api/getAllNews.php";
+        private final String connectionURL = "http://project.yildizozan.com/melikserif/api/getAllNews.php";
 
         private HttpURLConnection urlConnection;
         private String jsonString;

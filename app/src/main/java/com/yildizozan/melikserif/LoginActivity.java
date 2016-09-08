@@ -120,7 +120,7 @@ public class LoginActivity extends Activity {
         private static final int TIMEOUT_CONNECTION = 10 * 1000;    // milisec
 
         // Api link
-        private final String connectionURL = "http://yildizozan.com/projects/melikserif/api/login.php";
+        private final String connectionURL = "http://project.yildizozan.com/melikserif/api/login.php";
 
         // Api key
         private String connectionKey;
